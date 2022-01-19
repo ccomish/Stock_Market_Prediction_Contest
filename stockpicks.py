@@ -119,8 +119,5 @@ if __name__ == "__main__":
     
     sendUpdateMessage(groupChat, message)
     
-    if datetime.date.today().strftime("%Y") == "2023":
-        message = f'Congratulations {standingsDetails(calculateStandings(), choiceList)[0][0]}, you have won the stock picking contest of 2022. {standingsDetails(calculateStandings(), choiceList)[1][0]} and {standingsDetails(calculateStandings(), choiceList)[2][0]} owe you a beer.'
-        os.system('osascript send.scpt {} "{}"'.format(groupChat, message))
     
     
