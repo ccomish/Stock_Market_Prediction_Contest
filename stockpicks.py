@@ -97,7 +97,9 @@ def updateMessage(detailedStandings):
     second_place_statement = f"{detailedStandings[1][0]} is in 2nd place with a return of {detailedStandings[1][1]:.2f}% on his long pick, {detailedStandings[1][2]}, and a return of {detailedStandings[1][3]:.2f}% on his short pick, {detailedStandings[1][4]}, for a total return of {detailedStandings[1][5]:.2f}%\n\n"
     third_place_statement = f"{detailedStandings[2][0]} is in 3rd place with a return of {detailedStandings[2][1]:.2f}% on his long pick, {detailedStandings[2][2]}, and a return of {detailedStandings[2][3]:.2f}% on his short pick, {detailedStandings[2][4]}, for a total return of {detailedStandings[2][5]:.2f}%\n\n"
     message = first_place_statement + second_place_statement + third_place_statement
-    return message 
+    if datetime.date.today().strftime("%Y") == "2023":
+        message = message + f'Congratulations {standingsDetails(calculateStandings(), choiceList)[0][0]}, you have won the stock picking contest of 2022. {standingsDetails(calculateStandings(), choiceList)[1][0]} and {standingsDetails(calculateStandings(), choiceList)[2][0]} owe you a beer.'    
+    return message
     
 if __name__ == "__main__":
     carterChoices = ['MSFT', 'AMC']
@@ -106,7 +108,7 @@ if __name__ == "__main__":
     choiceList = [carterChoices, nolanChoices, stuartChoices]
     
     if datetime.date.today().weekday() == 6:
-        dateDeltaList = [22, 15, 8, 0]
+        dateDeltaList = [22, 15, 8, 1]
     else:
         dateDeltaList = [21, 14, 7, 0]
 
@@ -114,11 +116,11 @@ if __name__ == "__main__":
     message = updateMessage(standingsDetails(calculateStandings(), choiceList))
     plotData()
     groupChat = 'SpeculativePlays'
-    '''
+    
     sendUpdateMessage(groupChat, message)
     
     if datetime.date.today().strftime("%Y") == "2023":
         message = f'Congratulations {standingsDetails(calculateStandings(), choiceList)[0][0]}, you have won the stock picking contest of 2022. {standingsDetails(calculateStandings(), choiceList)[1][0]} and {standingsDetails(calculateStandings(), choiceList)[2][0]} owe you a beer.'
         os.system('osascript send.scpt {} "{}"'.format(groupChat, message))
-    '''
+    
     
